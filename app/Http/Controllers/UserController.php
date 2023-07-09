@@ -71,7 +71,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $usuario = User::finOrFail($id)->update($request->all());
+            $usuario = User::findOrFail($id)->update($request->all());
             return response()->json($usuario);
         }  catch (\Exception $e) {
             return response()->json(["mensaje" => "informacion no procesada"]);
@@ -85,7 +85,7 @@ class UserController extends Controller
     {
         try {
             User::find($id)->delete();
-            return response()->json(['mensaje' => "usuaario eliminado correctamente"]);
+            return response()->json(['mensaje' => "usuario eliminado correctamente"]);
         }  catch (\Exception $e) {
             return response()->json(["mensaje" => "informacion no procesada"]);
         }
