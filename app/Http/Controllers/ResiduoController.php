@@ -51,7 +51,14 @@ class ResiduoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $residuo = Residuo::find($id);
+        return response()->json($residuo);
+        } catch (\Exception $e) {
+            return response()->json(["mensaje" => "informacion no procesada"]);
+        }
+
+
     }
 
     /**
@@ -59,7 +66,12 @@ class ResiduoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $residuo = Residuo::findOrFail($id)->update($request);
+        return response()->json($residuo);
+        } catch (\Exception $e) {
+            return response()->json(["mensaje" => "informacion no procesada"]);
+        }
     }
 
     /**
@@ -67,6 +79,11 @@ class ResiduoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+           Residuo::find($id)->delete();
+           return response()->json(["mensaje" => "informacion Eliminada"]);
+        } catch (\Exception $e) {
+            return response()->json(["mensaje" => "informacion no procesada"]);
+        }
     }
 }
