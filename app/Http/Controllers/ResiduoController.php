@@ -67,7 +67,7 @@ class ResiduoController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $residuo = Residuo::findOrFail($id)->update($request);
+            $residuo = Residuo::findOrFail($id)->update($request->all());
         return response()->json($residuo);
         } catch (\Exception $e) {
             return response()->json(["mensaje" => "informacion no procesada"]);
