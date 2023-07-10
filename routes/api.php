@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResiduoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CountController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('residuos', ResiduoController::class);
-Route::apiResource('usuarios', UserController::class);
 
-// Route::middleware('auth:sanctum')->group(function(){
-// });
+
+Route::post('login', [AuthController::class, 'login']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('residuos', ResiduoController::class);
+    Route::apiResource('usuarios', UserController::class);
+    Route::post('/count/{numero}/{id}', [CountController::class, 'actCantidad']);
+});
 

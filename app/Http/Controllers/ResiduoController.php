@@ -67,6 +67,15 @@ class ResiduoController extends Controller
     public function update(Request $request, string $id)
     {
         try {
+            $request -> validate([
+                'nombre_residuo' => 'required',
+                'tipo_residuo' => 'required',
+                'cantidad_residuo' => 'required',
+                'descripcion_residuo' => 'required',
+                'deposito' => 'required',
+                'area' => 'required',
+            ]);
+            
             $residuo = Residuo::findOrFail($id)->update($request->all());
         return response()->json($residuo);
         } catch (\Exception $e) {

@@ -19,18 +19,18 @@ class AuthController extends Controller
             $token = $usuario ->createToken('token')->plainTextToken;
     
             $response = [
-                'id' => $user->id,
-                'nombre_usuario' => $user->nombre_usuario,
-                'apellido_usuario' => $user->apellido_usuario,
-                'identificacion' => $user->identificacion,
-                'correo' => $user->correo,
+                'id' => $usuario->id,
+                'nombre_usuario' => $usuario->nombre_usuario,
+                'apellido_usuario' => $usuario->apellido_usuario,
+                'identificacion' => $usuario->identificacion,
+                'email' => $usuario->email,
                 'api_token' => $token,
-                'rol' => $user->rol
+                'rol' => $usuario->rol
             ];
     
             return response()->json($response, 200);
         } catch (\Exception $e) {
-            return response()->json(["mensaje" => "informacion no procesada"], 422);
+            return response()->json($e,["mensaje" => "informacion no procesada"], 422);
         }
     }
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
             $usuario->currentAccessToken()->delete();
             return response()->json(["mensaje" => "cierre de session correcto"]);
         } catch (\Exception $e) {
-            return response()->json(["mensaje" => "informacion no procesada"], 422);
+            return response()->json($e,["mensaje" => "informacion no procesada"], 422);
         }
     }
 }

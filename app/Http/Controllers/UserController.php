@@ -31,7 +31,7 @@ class UserController extends Controller
                 'nombre_usuario' => 'required',
                 'apellido_usuario' => 'required',
                 'identificacion' => 'required',
-                'correo' => 'required',
+                'email' => 'required',
                 'password' => 'required',
                 'rol' => 'required',
             ]);
@@ -40,7 +40,7 @@ class UserController extends Controller
                 'nombre_usuario' => $request->nombre_usuario,
                 'apellido_usuario' => $request->apellido_usuario,
                 'identificacion' => $request->identificacion,
-                'correo' => $request->correo,
+                'email' => $request->correo,
                 'password' => bcrypt( $request->password),
                 'rol' => $request->rol
             ]);
