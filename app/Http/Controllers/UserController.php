@@ -40,14 +40,14 @@ class UserController extends Controller
                 'nombre_usuario' => $request->nombre_usuario,
                 'apellido_usuario' => $request->apellido_usuario,
                 'identificacion' => $request->identificacion,
-                'email' => $request->correo,
+                'email' => $request->email,
                 'password' => bcrypt( $request->password),
                 'rol' => $request->rol
             ]);
     
             return response()->json($usuario, 201);
         } catch (\Exception $e) {
-            return response()->json(["mensaje" => "informacion no procesada"]);
+            return response()->json($e,["mensaje" => "informacion no procesada"]);
         }
 
     }
